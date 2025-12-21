@@ -1,0 +1,10 @@
+id_produto,nome_produto,categoria,tipo_dado,resolucao_espacial,sistema_coordenadas,area_cobertura_km2,data_aquisicao,formato,fornecedor,preco
+1,Mapa de Uso do Solo 2023,Mapeamento Temático,Vetorial,10m,SIRGAS 2000 / UTM 23S,1500,2023-06-15,Shapefile,GeoMapas Ltda,3500.00
+2,Modelo Digital de Elevação,MDE,Raster,30m,WGS84,5000,2022-11-20,GeoTIFF,INPE,0.00
+3,Ortoimagem Urbana São Paulo,Imagem Orbital,Raster,0.5m,SIRGAS 2000,800,2023-02-10,GeoTIFF,Maxar,12000.00
+4,Mapa de Drenagem Hidrográfica,Hidrografia,Vetorial,1:25000,SIRGAS 2000,3200,2021-08-05,GeoPackage,ANA,0.00
+5,Classificação de Vegetação Cerrado,Vegetação,Raster,20m,WGS84,2100,2022-09-30,GeoTIFF,IBGE,2500.00
+6,Limites Administrativos Municipais,Base Cartográfica,Vetorial,1:50000,SIRGAS 2000,8500,2023-01-01,Shapefile,IBGE,0.00
+7,Mapa de Risco de Deslizamento,Análise Ambiental,Vetorial,1:10000,SIRGAS 2000 / UTM 22S,600,2023-07-12,GeoPackage,Defesa Civil,4800.00
+
+
