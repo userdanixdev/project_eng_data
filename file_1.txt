@@ -1,0 +1,5 @@
+
+
+
+Vou gerar um arquivo inicial para confirmação e subir o repositório
+local para o remoto via HTTPS. Abraços!
