@@ -1,0 +1,14 @@
+coluna,tipo,porque
+id_produto,TEXT,"SQLite trata VARCHAR como TEXT"
+nome_produto,TEXT,"Texto livre"
+categoria,TEXT,"Classificação"
+tipo_dado,TEXT,"Sem enum no Bronze"
+resolucao_espacial,REAL,"Valor numérico com decimal"
+sistema_coordenadas,TEXT,"EPSG é texto"
+area_cobertura_km2,REAL,"Permite soma, média"
+data_aquisicao,TEXT,"ISO 8601 (padrão em dados)"
+formato,TEXT,"String"
+fornecedor,TEXT,"String"
+preco,REAL,"Cálculos futuros"
+data_bronze,TEXT,"Auditoria / linhagem"
+
