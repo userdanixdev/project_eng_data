@@ -60,8 +60,7 @@ project/
 |   └── z0019_2.csv
 ├── notebooks/
 │   └── bronze_ingestao.ipynb
-├── src/
-│   └── datalake.db
+├── └── db_project_eng_dados.db
 ├── README.md
 
 
@@ -74,5 +73,21 @@ project/
 
 A camada Bronze é finalizada com a geração de um snapshot da tabela
 e métricas de carga, garantindo rastreabilidade e evidência de ingestão.
+
+## 🥈 Camada Silver
+
+A camada Silver é responsável pela padronização e qualificação dos
+dados oriundos da camada Bronze.
+
+Principais transformações aplicadas:
+
+- Remoção de duplicatas
+- Padronização de campos de data
+- Garantia de unicidade por id_produto
+- Inclusão de coluna de auditoria (data_silver)
+
+Ao final da execução, os dados são persistidos na tabela
+silver_produtos no SQLite.
+
 
 
