@@ -72,4 +72,7 @@ project/
 3. Instale as dependências
 4. Execute o script de ingestão Bronze
 
+A camada Bronze é finalizada com a geração de um snapshot da tabela
+e métricas de carga, garantindo rastreabilidade e evidência de ingestão.
+
 
