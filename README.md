@@ -56,6 +56,140 @@ Responsável por **limpeza, padronização e enriquecimento dos dados**, garanti
 Dados estruturados, confiáveis e prontos para modelagem e evolução para a camada Gold.
 Ao final da execução, os dados são persistidos na tabela silver_produtos no SQLite.
 
+### 🥇 Camada Gold – Modelo Dimensional (Star Schema)
+
+A **Camada Gold** adota o **Modelo Dimensional no padrão Star Schema**, no qual uma **tabela fato central** se relaciona com **tabelas dimensão desnormalizadas**, otimizando consultas analíticas e consumo por ferramentas de BI.
+
+#### Visão Geral:
+
+- Dados originados da **Camada Silver** (curados e validados)
+- Aplicação adequadas para regras de negócio
+- Estrutura orientada a análise
+- Alto desempenho para consultas agregadas
+
+---
+
+#### ⭐ Star Schema:
+
+No Star Schema:
+
+- **Tabelas Dimensão** armazenam atributos descritivos do negócio
+- **Tabela Fato** armazena métricas e eventos mensuráveis
+- Relacionamentos via **chaves substitutas (surrogate keys)**
+- Redução da complexidade de joins
+
+---
+
+#### 📐 Tabelas Dimensão
+
+**dim_produto**  
+Contém os atributos descritivos dos produtos geoespaciais, derivados da Camada Silver.
+
+Principais características:
+
+- Chave substituta (`sk_produto`)
+- Atributos desnormalizados
+- Baixa volatilidade
+- Utilizada para filtragem e agrupamento nas análises
+
+**dim_tempo**  
+Representa o eixo temporal das análises.
+
+Principais características:
+- Chave substituta (`sk_tempo`)
+- Derivação de atributos de data (ano, mês, dia)
+- Padronização temporal para análises históricas
+
+---
+
+#### 📊 Tabela Fato
+
+**fato_produto**
+
+Armazena as métricas associadas aos produtos geoespaciais, mantendo a granularidade definida na Camada Silver.
+
+Principais características:
+
+- Métricas numéricas (preço, área de cobertura, resolução espacial)
+- Referências às dimensões por chaves substitutas
+- Granularidade clara e consistente
+- Otimizada para agregações e métricas de negócio
+
+---
+
+#### 🎯 Benefícios do Star Schema na Camada Gold:
+
+- Consultas SQL mais simples e performáticas
+- Melhor compatibilidade com ferramentas de BI
+- Clareza semântica para analistas e cientistas de dados
+- Separação clara entre contexto (dimensões) e métricas (fato)
+
+#### 🔄 Slowly Changing Dimensions (SCD)
+
+As **Slowly Changing Dimensions (SCD)** tratam da forma como alterações nos atributos das dimensões são gerenciadas ao longo do tempo, preservando (ou não) o histórico das mudanças.
+
+Neste projeto, a Camada Gold adota uma abordagem **controlada e explícita de SCD**, alinhada às necessidades analíticas e à simplicidade operacional.
+
+---
+
+##### Tipos de SCD considerados
+
+**SCD Tipo 1 – Sobrescrita**
+
+- O valor antigo é substituído pelo novo
+- Não há preservação de histórico
+- Aplicado a atributos que não exigem rastreabilidade histórica
+
+**Exemplos de uso:**
+
+- Correção de nome do produto
+- Ajustes ortográficos
+- Padronização de valores
+
+---
+
+**SCD Tipo 2 – Preservação de Histórico**
+
+- Cada mudança gera um novo registro na dimensão
+- Preserva o histórico completo das alterações
+- Permite análises históricas corretas
+
+**Atributos de controle adicionais:**
+- `data_inicio_vigencia`
+- `data_fim_vigencia`
+- `registro_ativo`
+
+---
+
+##### Estratégia adotada no projeto
+
+A dimensão **dim_produto** é tratada como:
+
+- **SCD Tipo 1** para atributos descritivos estáveis  
+- **Evolutível para SCD Tipo 2** caso haja necessidade de análise histórica
+
+Essa abordagem equilibra:
+
+- Simplicidade do modelo
+- Baixo custo operacional
+- Possibilidade de evolução futura
+
+---
+
+##### Impacto na Tabela Fato
+
+- A tabela **fato_produto** referencia sempre a **versão vigente** da dimensão
+- Em um cenário SCD Tipo 2, a Fato passa a referenciar a dimensão válida no momento do evento
+- Garante consistência histórica nas análises
+
+---
+
+##### Boas práticas adotadas:
+
+- Definição explícita da estratégia SCD na documentação
+- Separação clara entre atributos históricos e não históricos
+- Preparação do modelo para evolução sem quebra de schema
+
 
 
 ## 🛠️ Tecnologias Utilizadas
@@ -76,7 +210,11 @@ project/
 |   └── z0019_2.csv
 ├── notebooks/
 │   └── bronze_ingestao.ipynb
-├── └── db_project_eng_dados.db
+│   └── curated_silver.ipynb
+│   └── gold_layer.ipynb
+|   └── db_project_eng_dados.db
+|──.gitignore
+|── file_1.txt
 ├── README.md
 
 
@@ -85,7 +223,7 @@ project/
 1. Clone o repositório
 2. Crie o ambiente virtual
 3. Instale as dependências
-4. Execute o script de ingestão Bronze
+4. Execute os scripts 
 
 
 
