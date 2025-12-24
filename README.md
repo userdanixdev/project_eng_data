@@ -132,7 +132,7 @@ Neste projeto, a Camada Gold adota uma abordagem **controlada e explícita de SC
 
 ---
 
-##### Tipos de SCD considerados
+##### Tipos de SCD considerados:
 
 **SCD Tipo 1 – Sobrescrita**
 
@@ -155,6 +155,7 @@ Neste projeto, a Camada Gold adota uma abordagem **controlada e explícita de SC
 - Permite análises históricas corretas
 
 **Atributos de controle adicionais:**
+
 - `data_inicio_vigencia`
 - `data_fim_vigencia`
 - `registro_ativo`
