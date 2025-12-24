@@ -130,6 +130,9 @@ As **Slowly Changing Dimensions (SCD)** tratam da forma como alterações nos at
 
 Neste projeto, a Camada Gold adota uma abordagem **controlada e explícita de SCD**, alinhada às necessidades analíticas e à simplicidade operacional.
 
+**SCD Tipo 1** sobrescreve os atributos da dimensão quando ocorrem alterações, mantendo apenas a 
+versão mais recente dos dados, sem preservação histórica.
+
 ---
 
 ##### Tipos de SCD considerados:
@@ -144,7 +147,7 @@ Neste projeto, a Camada Gold adota uma abordagem **controlada e explícita de SC
 
 - Correção de nome do produto
 - Ajustes ortográficos
-- Padronização de valores
+- Classificação e padronização de valores
 
 ---
 
@@ -177,20 +180,42 @@ Essa abordagem equilibra:
 
 ---
 
+### Tabela Dimensão:
+
+A dimensão **dim_produto** foi inicialmente construída utilizando o conceito de **SCD Tipo 1**, 
+refletindo apenas o estado atual dos atributos do produto, sem preservação de histórico.
+Essa abordagem é adequada para atributos que não exigem rastreabilidade temporal ou onde 
+correções devem sobrescrever valores anteriores.
+
 ##### Impacto na Tabela Fato
 
 - A tabela **fato_produto** referencia sempre a **versão vigente** da dimensão
 - Em um cenário SCD Tipo 2, a Fato passa a referenciar a dimensão válida no momento do evento
 - Garante consistência histórica nas análises
 
+“Com SCD Tipo 2, a tabela fato não sofre alterações estruturais. O impacto ocorre no relacionamento
+ com a dimensão, pois a fato passa a referenciar a versão correta da dimensão por meio da chave substituta, preservando o histórico.”
+
 ---
+### Evolução para SDC 2:
+
+A tabela **dim_produto** na camada Gold foi modelada utilizando o conceito de Slowly Changing Dimension
+**Tipo 2 (SCD 2)**, com o objetivo de preservar o histórico completo das alterações dos atributos descritivos dos produtos geoespaciais ao longo do tempo.
+
+Cada alteração relevante em um produto gera uma nova versão da dimensão, mantendo as versões anteriores para fins de auditoria, rastreabilidade e análises históricas.
+
+#### Benefícios:
+
+- Preservação total do histórico
+- Auditoria e rastreabilidade completas
+- Análises temporais corretas (ex: preço, cobertura ou formato ao longo do tempo)
+- Conformidade com boas práticas de DW
 
 ##### Boas práticas adotadas:
 
 - Definição explícita da estratégia SCD na documentação
 - Separação clara entre atributos históricos e não históricos
 - Preparação do modelo para evolução sem quebra de schema
-
 
 
 ## 🛠️ Tecnologias Utilizadas
@@ -213,6 +238,7 @@ project/
 │   └── bronze_ingestao.ipynb
 │   └── curated_silver.ipynb
 │   └── gold_layer.ipynb
+│   └── gold_layer_2.ipynb
 |   └── db_project_eng_dados.db
 |──.gitignore
 |── file_1.txt
