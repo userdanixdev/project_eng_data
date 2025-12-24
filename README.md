@@ -41,6 +41,22 @@ Bronze, priorizando rastreabilidade e reprocessamento.
 | preco                | REAL | Cálculos futuros |
 | data_bronze          | TEXT | Auditoria / linhagem |
 
+### 🥈 Camada Silver (Curated / Cleansed / Refined)
+
+Responsável por **limpeza, padronização e enriquecimento dos dados**, garantindo qualidade e consistência antes do consumo analítico. A camada Silver são oriundos da camada Bronze.
+
+**Principais atividades:**
+
+- Tratamento de nulos e duplicidades  
+- Validação e correção de tipos de dados  
+- Padronização de formatos e nomenclaturas  
+- Inclusão de coluna de auditoria (data_silver)
+
+**Resultado:**  
+Dados estruturados, confiáveis e prontos para modelagem e evolução para a camada Gold.
+Ao final da execução, os dados são persistidos na tabela silver_produtos no SQLite.
+
+
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -71,23 +87,7 @@ project/
 3. Instale as dependências
 4. Execute o script de ingestão Bronze
 
-A camada Bronze é finalizada com a geração de um snapshot da tabela
-e métricas de carga, garantindo rastreabilidade e evidência de ingestão.
 
-## 🥈 Camada Silver
-
-A camada Silver é responsável pela padronização e qualificação dos
-dados oriundos da camada Bronze.
-
-Principais transformações aplicadas:
-
-- Remoção de duplicatas
-- Padronização de campos de data
-- Garantia de unicidade por id_produto
-- Inclusão de coluna de auditoria (data_silver)
-
-Ao final da execução, os dados são persistidos na tabela
-silver_produtos no SQLite.
 
 
 
