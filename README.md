@@ -243,7 +243,7 @@ project/
 |──.gitignore
 |── file_1.txt
 ├── README.md
-
+├── requirements.txt
 
 ## ▶️ Como Executar
 
@@ -251,6 +251,16 @@ project/
 2. Crie o ambiente virtual
 3. Instale as dependências
 4. Execute os scripts 
+
+> ⚠️ Importante  
+> Ao abrir os notebooks no VS Code, certifique-se de que o kernel selecionado
+> corresponde ao ambiente Conda `ambiente_virtual`.
+
+### Executando os notebooks
+
+```bash
+jupyter notebook
+
 
 
 
