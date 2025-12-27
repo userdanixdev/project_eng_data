@@ -1,4 +1,4 @@
-# Projeto de Engenharia de Dados — Camada Bronze com SQLite
+# Projeto de Engenharia de Dados 
 
 Este projeto tem como objetivo a construção de um pipeline de dados
 utilizando Python e SQLite, seguindo o conceito de camadas
@@ -135,7 +135,7 @@ versão mais recente dos dados, sem preservação histórica.
 
 ---
 
-##### Tipos de SCD considerados:
+### Tipos de SCD considerados:
 
 **SCD Tipo 1 – Sobrescrita**
 
@@ -165,7 +165,7 @@ versão mais recente dos dados, sem preservação histórica.
 
 ---
 
-##### Estratégia adotada no projeto
+### Estratégia adotada no projeto
 
 A dimensão **dim_produto** é tratada como:
 
@@ -250,13 +250,10 @@ project/
 1. Clone o repositório
 2. Crie o ambiente virtual
 3. Instale as dependências
-4. Execute os scripts 
+4. Iniciar o Jupyter Notebook pelo terminal
 
-### Executando os notebooks
-
-```bash
-jupyter notebook
-
+Este projeto foi estruturado para que qualquer pessoa consiga executá-lo apenas seguindo este README, 
+sem configurações adicionais no sistema.
 
 
 
