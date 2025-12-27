@@ -228,7 +228,7 @@ Cada alteração relevante em um produto gera uma nova versão da dimensão, man
 - VS Code
 
 ## 📁 Estrutura do Projeto
-
+```
 project/
 ├── landing/
 │   └── dict_bronze_prod.csv
